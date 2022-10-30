@@ -43,13 +43,11 @@ public class Cat {
 
     @Override
     public String toString() {
-        return user;
-        /*return "Cat{" +
-                "id='" + id + '\'' +
-                ", text='" + text + '\'' +
-                ", type='" + type + '\'' +
-                ", user='" + user + '\'' +
-                ", upvotes='" + upvotes + '\'' +
-                '}';*/
+        return "Cat " +
+                "id='" + id + '\n' +
+                ", text='" + text + '\n' +
+                ", type='" + type + '\n' +
+                ", user='" + user + '\n' +
+                ", upvotes='" + upvotes + '\n';
     }
 }

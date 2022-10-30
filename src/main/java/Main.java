@@ -17,33 +17,21 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        /*CloseableHttpClient httpClient = HttpClientBuilder.create()
-                .setUserAgent("My test service")
-                .setDefaultRequestConfig(RequestConfig.custom()
-                        .setConnectTimeout(5000)
-                        .setSocketTimeout(30000)
-                        .setRedirectsEnabled(false)
-                        .build())
-                .build();*/
 
         HttpGet request = new HttpGet("https://raw.githubusercontent.com/netology-code/jd-homeworks/master/http/task1/cats");
 
         CloseableHttpResponse response = httpClient.execute(request);
 
-        /*String body = new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8);
-        System.out.println(body);*/
 
         List<Cat> cats = objectMapper.readValue(
                 response.getEntity().getContent().readAllBytes(),
                 new TypeReference<>() {}
         );
 
+        cats.stream()
+                .filter(x -> x.getUpvotes() > 0)
+                .forEach(System.out::println);
 
-
-        cats.forEach(System.out::println);
-       /* for (Cat cat : cats) {
-            System.out.println(cat);
-        }*/
 
         response.close();
         httpClient.close();
